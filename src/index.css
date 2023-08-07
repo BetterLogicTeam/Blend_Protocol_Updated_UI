@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@layer base{
+    body{
+        @apply bg-[#010010] text-white font-base;
+    }
+    h2{
+        @apply text-5xl font-heading font-medium;
+    }
+}
+
+@layer utilities{
+    .presale-shadow{
+        box-shadow: 0px 4px 40px 13px rgba(82, 221, 180, 0.25);
+    }
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Black-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Black-Italic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Medium.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Thin-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Thin-Italic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Bold.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Light-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Light-Italic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Black.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Light.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Regular.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Bold-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Bold-Italic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck Regular';
+    src: url('./fonts/Gemsbuck01-Regular-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Regular-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Medium-Italic.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Medium-Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gemsbuck';
+    src: url('./fonts/Gemsbuck01-Thin.woff2') format('woff2'),
+        url('./fonts/Gemsbuck01-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+
