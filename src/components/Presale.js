@@ -52,8 +52,8 @@ const Presale = () => {
   const data1 = useBalance({
     address: address || null,
   });
-  const webSupply = new Web3("https://eth-sepolia.public.blastapi.io");
-  const webSupply_Binance = new Web3("https://bsc-testnet.public.blastapi.io");
+  const webSupply = new Web3("https://eth-mainnet.public.blastapi.io");
+  const webSupply_Binance = new Web3("https://bsc-mainnet.public.blastapi.io");
 
   const USDT_Balance = async () => {
     let contractOf_Token;
@@ -62,7 +62,7 @@ const Presale = () => {
     let contractOf_USDT;
     let contractOf_USDC;
 
-    if (chain?.id == 97) {
+    if (chain?.id == 56) {
       contractOf_BUSDToken = new webSupply_Binance.eth.Contract(
         BUSD_Abi,
         BUSD_Address
@@ -99,20 +99,29 @@ const Presale = () => {
     );
 
     if (address && isActive == 1) {
-      if (chain?.id == 97) {
+      if (chain?.id == 56) {
         let balance = await contractOf_BUSDToken.methods
           .balanceOf(address)
           .call();
         balance = webSupply_Binance.utils.fromWei(balance.toString());
         setToken_Balance(balance);
       } else {
+        
+        let balance = await contractOf_USDC.methods.balanceOf(address).call();
+        // console.log("Balance",balance);
+        setToken_Balance(balance / 1000000);
+     
+      }
+    } else if (address && isActive == 2) {
+      if (chain?.id == 56) {
+      let balance = await contractOf_USDT?.methods.balanceOf(address).call();
+      balance = webSupply_Binance.utils.fromWei(balance.toString());
+      setToken_Balance(balance);
+      }
+      else{
         let balance = await contractOf_Token.methods.balanceOf(address).call();
         setToken_Balance(balance / 1000000);
       }
-    } else if (address && isActive == 2) {
-      let balance = await contractOf_USDT.methods.balanceOf(address).call();
-      balance = webSupply_Binance.utils.fromWei(balance.toString());
-      setToken_Balance(balance);
     }
 
     let Blend_Protoco_Sold = await contractOf.methods.token_Sold().call();
@@ -139,7 +148,7 @@ const Presale = () => {
     try {
       if (get_userValue) {
         let contractOf;
-        if (chain?.id == 97) {
+        if (chain?.id == 56) {
           contractOf = new webSupply_Binance.eth.Contract(
             Blend_Protoco_Presale_BNB_Abi,
             Blend_Protoco_Presale_BNB_Address
@@ -155,7 +164,7 @@ const Presale = () => {
           if (Number(get_userValue) < parseFloat(data1?.data?.formatted).toFixed(4)) {
             seterror("")
             let value = webSupply.utils.toWei(get_userValue.toString());
-            if (chain?.id == 97) {
+            if (chain?.id == 56) {
               let getBlend_ProtocovalueperBNB = await contractOf.methods
                 .getvalueperBNB(value)
                 .call();
@@ -175,14 +184,14 @@ const Presale = () => {
           } else {
             seterror(
               `You do not have enough ${
-                chain?.id == 97 ? "BNB" : "ETH"
+                chain?.id == 56 ? "BNB" : "ETH"
               } to pay for this transaction`
             );
           }
         } else if (isActive == 1) {
           if (get_userValue < Token_Balance) {
             seterror("")
-            if (chain?.id == 97) {
+            if (chain?.id == 56) {
               let value = webSupply_Binance.utils.toWei(
                 get_userValue.toString()
               );
@@ -207,14 +216,14 @@ const Presale = () => {
           } else {
             seterror(
               `You do not have enough ${
-                chain?.id == 97 ? "BUSD" : "USDC"
+                chain?.id == 56 ? "BUSD" : "USDC"
               } to pay for this transaction`
             );
           }
         } else if (isActive == 2) {
           if (get_userValue < Token_Balance) {
             seterror("")
-            if (chain?.id == 97) {
+            if (chain?.id == 56) {
               let value = webSupply_Binance.utils.toWei(
                 get_userValue.toString()
               );
@@ -238,7 +247,7 @@ const Presale = () => {
           } else {
             seterror(
               `You do not have enough ${
-                chain?.id == 97 ? "USDT" : "USDT"
+                chain?.id == 56 ? "USDT" : "USDT"
               } to pay for this transaction`
             );
           }
@@ -359,7 +368,7 @@ const Presale = () => {
             UserID = window.location.href.split("=");
             UserID = UserID[UserID.length - 1];
           }
-          if (chain.id == 11155111 && isActive == 1) {
+          if (chain.id == 1 && isActive == 1) {
             setspinner(true);
 
             let value = get_userValue * 1000000;
@@ -381,7 +390,7 @@ const Presale = () => {
               toast.success("Approve SuccessFully");
               Ethereum_Token(UserID);
             }, 5000);
-          } else if (chain.id == 11155111 && isActive == 2) {
+          } else if (chain.id == 1 && isActive == 2) {
             setspinner(true);
 
             let value = get_userValue * 1000000;
@@ -422,7 +431,7 @@ const Presale = () => {
     try {
       let value = get_userValue * 1000000;
 
-      if (chain.id == 11155111 && isActive == 1) {
+      if (chain.id == 1 && isActive == 1) {
         setspinner(true);
 
         const { request } = await prepareWriteContract({
@@ -441,7 +450,7 @@ const Presale = () => {
           setspinner(false);
           toast.success("Transaction Completed");
         }, 4000);
-      } else if (chain.id == 11155111 && isActive == 2) {
+      } else if (chain.id == 1 && isActive == 2) {
         setspinner(true);
         const { request } = await prepareWriteContract({
           address: Blend_Protoco_Presale_Eth_Address,
@@ -474,7 +483,7 @@ const Presale = () => {
             UserID = window.location.href.split("=");
             UserID = UserID[UserID.length - 1];
           }
-          if (chain.id == 97 && isActive == 1) {
+          if (chain.id == 56 && isActive == 1) {
             setspinner(true);
 
             let value = webSupply_Binance.utils.toWei(get_userValue.toString());
@@ -496,7 +505,7 @@ const Presale = () => {
               toast.success("Approve SuccessFully");
               BUSD_Buy(UserID);
             }, 5000);
-          } else if (chain.id == 97 && isActive == 2) {
+          } else if (chain.id == 56 && isActive == 2) {
             setspinner(true);
 
             let value = webSupply_Binance.utils.toWei(get_userValue.toString());
@@ -536,7 +545,7 @@ const Presale = () => {
   const BUSD_Buy = async (UserID) => {
     try {
       let value = webSupply_Binance.utils.toWei(get_userValue.toString());
-      if (chain.id == 97 && isActive == 1) {
+      if (chain.id == 56 && isActive == 1) {
         setspinner(true);
 
         const { request } = await prepareWriteContract({
@@ -555,7 +564,7 @@ const Presale = () => {
           setspinner(false);
           toast.success("Transaction Completed");
         }, 4000);
-      } else if (chain.id == 97 && isActive == 2) {
+      } else if (chain.id == 56 && isActive == 2) {
         setspinner(true);
 
         const { request } = await prepareWriteContract({
@@ -744,7 +753,7 @@ const Presale = () => {
                     } `}
                     onClick={() => setisActive(0)}
                   >
-                    {chain?.id == 97 ? (
+                    {chain?.id == 56 ? (
                       <>
                         <img className="w-6" src="/icons/bnb.png" alt="" />
                       </>
@@ -755,7 +764,7 @@ const Presale = () => {
                     )}
                     <sapan className="font-medium">
                       {" "}
-                      {chain?.id == 97 ? <>BNB</> : <>ETH</>}
+                      {chain?.id == 56 ? <>BNB</> : <>ETH</>}
                     </sapan>
                   </div>
                   <div
@@ -764,7 +773,7 @@ const Presale = () => {
                     } `}
                     onClick={() => setisActive(1)}
                   >
-                    {chain?.id == 97 ? (
+                    {chain?.id == 56 ? (
                       <>
                         <img
                           className="w-6 rounded-full"
@@ -782,7 +791,7 @@ const Presale = () => {
                       </>
                     )}
                     <span className="font-medium">
-                      {chain?.id == 97 ? <>BUSD</> : <>USDC</>}
+                      {chain?.id == 56 ? <>BUSD</> : <>USDC</>}
                     </span>
                   </div>
                   <div
@@ -791,7 +800,7 @@ const Presale = () => {
                     } `}
                     onClick={() => setisActive(2)}
                   >
-                    {chain?.id == 97 ? (
+                    {chain?.id == 56 ? (
                       <>
                         <img className="w-6" src="/icons/usdt.svg" alt="" />
                       </>
@@ -801,7 +810,7 @@ const Presale = () => {
                       </>
                     )}
                     <span className="font-medium">
-                      {chain?.id == 97 ? <>USDT</> : <>USDT</>}
+                      {chain?.id == 56 ? <>USDT</> : <>USDT</>}
                     </span>
                   </div>
                 </div>
@@ -809,11 +818,11 @@ const Presale = () => {
                 <p className="eth_bla text-center mt-5">
                   {" "}
                   {isActive == 0
-                    ? chain?.id == 97
+                    ? chain?.id == 56
                       ? "BNB "
                       : "ETH "
                     : isActive == 1
-                    ? chain?.id == 97
+                    ? chain?.id == 56
                       ? "BUSD "
                       : "USDC "
                     : "USDT "}
@@ -834,7 +843,7 @@ const Presale = () => {
                 <div className="grid md:grid-cols-2 gap-8 mt-6">
                   <div>
                     <label className="mb-2 inline-block text-sm">
-                      Amount in {isActive==0 ? chain?.id == 97 ? "BNB":"ETH":isActive==1 ? chain?.id == 97 ? "BUSD":"USDT":"USDT" } 
+                      Amount in {isActive==0 ? chain?.id == 56 ? "BNB":"ETH":isActive==1 ? chain?.id == 56 ? "BUSD":"USDT":"USDT" } 
                     </label>
                     <div className="relative">
                       <input
@@ -846,7 +855,7 @@ const Presale = () => {
                       <div className="absolute top-1/2 -translate-y-1/2 right-4">
                         {isActive == 0 ? (
                           <>
-                            {chain?.id == 97 ? (
+                            {chain?.id == 56 ? (
                               <>
                                 <img
                                   className="w-6"
@@ -866,7 +875,7 @@ const Presale = () => {
                           </>
                         ) : isActive == 1 ? (
                           <>
-                            {chain?.id == 97 ? (
+                            {chain?.id == 56 ? (
                               <>
                                 <img
                                   className="w-6"
@@ -886,7 +895,7 @@ const Presale = () => {
                           </>
                         ) : (
                           <>
-                            {chain?.id == 97 ? (
+                            {chain?.id == 56 ? (
                               <>
                                 <img
                                   className="w-6"
@@ -945,15 +954,15 @@ const Presale = () => {
                     className="py-2 px-6 font-medium tracking-normal bg-accent hover:bg-accent/80 rounded-full"
                     onClick={() =>
                       isActive == 0
-                        ? chain?.id == 97
+                        ? chain?.id == 56
                           ? buyBNB()
                           : buyEth()
                         : isActive == 1
-                        ? chain?.id == 97
+                        ? chain?.id == 56
                           ? buyBUSD()
                           : buyUSDT()
                         : isActive == 2
-                        ? chain?.id == 97
+                        ? chain?.id == 56
                           ? buyBUSD()
                           : buyUSDT()
                         : ""
@@ -964,12 +973,12 @@ const Presale = () => {
                   <button
                     className="py-2 px-6 font-medium tracking-normal bg-accent hover:bg-accent/80 rounded-full"
                     onClick={() =>
-                      chain?.id == 97
+                      chain?.id == 56
                         ? switchNetwork?.(chains[0]?.id)
                         : switchNetwork?.(chains[1]?.id)
                     }
                   >
-                    {chain?.id != 97 ? "Buy with BNB" : "Buy with ETH"}{" "}
+                    {chain?.id != 56 ? "Buy with BNB" : "Buy with ETH"}{" "}
                   </button>
                 </div>
                 {/* BUY BUTTON END */}

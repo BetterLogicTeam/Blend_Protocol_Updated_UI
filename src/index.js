@@ -6,12 +6,12 @@ import App from './App';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
-import { sepolia,bscTestnet } from 'wagmi/chains'
+import { mainnet, bsc } from 'wagmi/chains'
 import { InjectedConnector } from '@wagmi/core/connectors/injected'
 import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect'
 import { publicProvider } from '@wagmi/core/providers/public'
 
-const chains = [sepolia,bscTestnet]
+const chains = [mainnet,bsc]
 const projectId = 'ae64d2d938316ce3350fea4c10f6cc79'
 
 const { publicClient,webSocketPublicClient } = configureChains(chains, [w3mProvider({ projectId })])
